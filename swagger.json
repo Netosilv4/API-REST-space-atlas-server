@@ -1,0 +1,269 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Space Atlas API Documentation",
+    "contact": {
+      "email": "netos2@rocketmail.com"
+    },
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "https://atlas-school-system.herokuapp.com/"
+    },
+    {
+      "url": "http://localhost:8080/"
+    }
+  ],
+  "paths": {
+    "/login": {
+      "get": {
+        "summary": "API Login",
+        "tags": ["Login"],
+        "parameters": [
+          {
+            "name": "register",
+            "in": "query",
+            "description": "Student register",
+            "required": true
+          },
+          {
+            "name": "password",
+            "in": "query",
+            "description": "Student password",
+            "required": true
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "$ref": "#/components/schemas/authmessage"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "$ref": "#/components/schemas/user"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/student": {
+      "get": {
+        "summary": "API get student by register",
+        "tags": ["Student"],
+        "security":  [{ "bearerAuth": []}],
+        "parameters": [
+          {
+            "name": "register",
+            "in": "query",
+            "description": "Student register",
+            "required": true
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "$ref": "#/components/schemas/authmessage"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "$ref": "#/components/schemas/student"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/schedule": {
+      "get": {
+        "summary": "API get student schedule",
+        "tags": ["Schedule"],
+        "security":  [{ "bearerAuth": []}],
+        "parameters": [
+          {
+            "name": "className",
+            "in": "query",
+            "description": "Student class name",
+            "required": true
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "$ref": "#/components/schemas/authmessage"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "$ref": "#/components/schemas/schedule"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "authmessage": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "number"
+          },
+          "message": {
+            "type": "string"
+          }
+        }
+      },
+      "schedule": {
+        "type": "object",
+        "properties": {
+          "studentClass": {
+            "type": "object",
+            "properties": {
+              "_id": { "type": "string"},
+              "class": { "type": "string"},
+              "period": { "type": "string"},
+              "supervisor": { "type": "string"},
+              "schedule": {
+                "type": "object",
+                "properties": {
+                  "monday": { "type": "array", "items": { "type": "string"}},
+                  "tuesday": { "type": "array", "items": { "type": "string"}},
+                  "thursday": { "type": "array", "items": { "type": "string"}},
+                  "wednesday": { "type": "array", "items": { "type": "string"}},
+                  "friday": { "type": "array", "items": { "type": "string"}}
+                }
+              }
+            }
+          },
+          "schoolSubjects": {
+            "type": "array",
+            "items": { "type": "string"}
+          }
+        }
+      },
+      "user": {
+        "type": "object",
+        "properties": {
+          "register": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          },
+          "token": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string"
+          }
+        }
+      },
+      "student": {
+        "type": "object",
+        "properties": {
+          "_id": { "type": "string"},
+          "auth": {
+            "type": "object",
+            "properties": {
+              "register": {
+                "type": "string"
+              },
+              "password": {
+                "type": "string"
+              }
+            }
+          },
+          "basicInfo": {
+            "type": "object",
+            "properties": {
+              "parents": {
+                "type": "object",
+                "properties": {
+                  "mother": { "type": "string"},
+                  "father": { "type": "string"}
+                }
+              },
+              "name": { "type": "string"},
+              "genre": { "type": "string"},
+              "class": { "type": "string"},
+              "age": { "type": "number"},
+              "birthDate": { "type": "string"},
+              "phone": { "type": "string"},
+              "email": { "type": "string"},
+              "photo": { "type": "string"}
+            }
+          },
+          "adress": {
+            "type": "object",
+              "properties": {
+                "city": { "type": "string"},
+                "district": { "type": "string"},
+                "street": { "type": "string"},
+                "state": { "type": "string"},
+                "cep": { "type": "string"},
+                "number": { "type": "number"}
+              }
+          }
+        }
+      }
+     },
+     "securitySchemes": {
+         "bearerAuth": {
+           "type": "http",
+           "scheme": "bearer",
+           "bearerFormat": "JWT"
+       }
+     }
+  }
+}

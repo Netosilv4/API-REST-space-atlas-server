@@ -1,3 +1,5 @@
+import swaggerUi from 'swagger-ui-express';
+
 import express, { Request, Response } from 'express';
 
 import { createServer } from 'http';
@@ -5,6 +7,8 @@ import { createServer } from 'http';
 import { Server } from 'socket.io';
 
 import cors from 'cors';
+
+import swaggerDocs from './swagger.json';
 
 import routes from './routes/routes';
 
@@ -23,6 +27,8 @@ app.get('/', (req: Request, res: Response): void => {
 });
 
 app.use(routes);
+
+app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs));
 
 export const http = createServer(app);
 

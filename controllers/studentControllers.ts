@@ -5,9 +5,9 @@ import {
 } from '../services/studentServices';
 
 export const getStudent = async (req: Request, res: Response): Promise<void> => {
-  const { register }: { register: string } = req.body;
+  const { register } = req.query;
 
-  const student = await studentHandler(register);
+  const student = await studentHandler(register as string);
 
   res.status(200).json(student);
 };
@@ -21,17 +21,17 @@ export const postNewRequest = async (req: Request, res: Response): Promise<void>
 };
 
 export const getSchedule = async (req: Request, res: Response): Promise<void> => {
-  const { className }: { className: string} = req.body;
+  const { className } = req.query;
 
-  const schedule = await scheduleHandler(className);
+  const schedule = await scheduleHandler(className as string);
 
   res.status(200).json(schedule);
 };
 
 export const getGrades = async (req: Request, res: Response): Promise<void> => {
-  const { register }: { register: string } = req.body;
+  const { register } = req.query;
 
-  const gradesAndSubjects = await gradesHandler(register);
+  const gradesAndSubjects = await gradesHandler(register as string);
 
   res.status(200).json(gradesAndSubjects);
 };

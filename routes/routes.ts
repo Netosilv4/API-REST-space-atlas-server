@@ -13,17 +13,17 @@ const routes = express.Router();
 
 // Login Controllers
 
-routes.post('/login', rescue(login));
+routes.get('/login', rescue(login));
 
 // Student Controllers
 
-routes.post('/student', rescue(tokenCheck), rescue(getStudent));
+routes.get('/student', rescue(tokenCheck), rescue(getStudent));
 
 routes.post('/request', rescue(tokenCheck), rescue(postNewRequest));
 
-routes.post('/schedule', rescue(tokenCheck), rescue(getSchedule));
+routes.get('/schedule', rescue(tokenCheck), rescue(getSchedule));
 
-routes.post('/grades', rescue(tokenCheck), rescue(getGrades));
+routes.get('/grades', rescue(tokenCheck), rescue(getGrades));
 
 // Admin Controllers
 

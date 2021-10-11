@@ -11,7 +11,7 @@ export const studentHandler = async (register: string)
   : Promise<IStudent & { _id: any; }| AuthMessage> => {
   const response = await findStudent(register);
 
-  if (!response) return { code: 401, message: 'Estudante não encontrado' };
+  if (!response) return { code: 400, message: 'Estudante não encontrado' };
 
   return response;
 };
@@ -31,7 +31,7 @@ export const scheduleHandler = async (classCode: string)
   : Promise<ISchedule | AuthMessage> => {
   const sClass = await findClass(classCode);
 
-  if (!sClass) return { code: 401, message: 'Não encontramos uma turma com este código' };
+  if (!sClass) return { code: 400, message: 'Não encontramos uma turma com este código' };
 
   const subjects = await findSubjects();
 
@@ -42,7 +42,7 @@ export const gradesHandler = async (register: string):
   Promise<IGradesSubjects | AuthMessage> => {
   const grades = await findGrades(register);
 
-  if (!grades) return { code: 401, message: 'Não encontramos provas com esse registro' };
+  if (!grades) return { code: 400, message: 'Não encontramos provas com esse registro' };
 
   const subjects = await findSubjects();
 

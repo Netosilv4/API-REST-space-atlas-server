@@ -20,7 +20,7 @@ export const tokenCheck = async (
   req: Request, res: Response, next: NextFunction,
 ): Promise<void> => {
   const { authorization } = req.headers;
-  const { register }: { register: string } = req.body;
+  const { register } = req.query;
 
   if (!register) {
     res.status(401).json({ message: 'Matrícula não informada ' });
@@ -38,7 +38,7 @@ export const tokenCheck = async (
 
   const decoded = jwt.verify(split[1], secret);
 
-  const user = await findStudent(register);
+  const user = await findStudent(register as string);
 
   if (!user) {
     res.status(401).json({ message: 'Erro ao procurar usuário do token.' });
