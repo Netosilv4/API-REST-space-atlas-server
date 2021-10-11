@@ -2,4 +2,4 @@ import { http } from './http';
 
 import './chat';
 
-http.listen(8080);
+http.listen(process.env.PORT);
