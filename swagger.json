@@ -36,7 +36,7 @@
         ],
         "responses": {
           "400": {
-            "description": "Unauthorized",
+            "description": "Missing params / body",
             "content": {
               "application/json": {
                 "schema": {
@@ -78,7 +78,7 @@
         ],
         "responses": {
           "400": {
-            "description": "Unauthorized",
+            "description": "Missing params / body",
             "content": {
               "application/json": {
                 "schema": {
@@ -107,8 +107,8 @@
     },
     "/schedule": {
       "get": {
-        "summary": "API get student schedule",
-        "tags": ["Schedule"],
+        "summary": "Get student schedule",
+        "tags": ["Student"],
         "security":  [{ "bearerAuth": []}],
         "parameters": [
           {
@@ -116,11 +116,16 @@
             "in": "query",
             "description": "Student class name",
             "required": true
+          },
+          { "name": "register",
+            "in": "query",
+            "description": "Student register",
+            "required": true
           }
         ],
         "responses": {
           "400": {
-            "description": "Unauthorized",
+            "description": "Missing params / body",
             "content": {
               "application/json": {
                 "schema": {
@@ -140,6 +145,48 @@
                 "schema": {
                   "type": "object",
                   "$ref": "#/components/schemas/schedule"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/grades": {
+      "get": {
+        "summary": "Get student grades",
+        "tags": ["Student"],
+        "security":  [{ "bearerAuth": []}],
+        "parameters": [
+          {
+            "name": "register",
+            "in": "query",
+            "description": "Student class name",
+            "required": true
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Missing params / body",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "$ref": "#/components/schemas/authmessage"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "$ref": "#/components/schemas/grades"
                 }
               }
             }
@@ -254,6 +301,33 @@
                 "cep": { "type": "string"},
                 "number": { "type": "number"}
               }
+          }
+        }
+      },
+      "grades": {
+        "type": "object",
+        "properties":{
+          "grades": {
+            "type": "object",
+            "properties": {
+              "_id": { "type": "string"},
+              "register": { "type": "string"},
+              "grades": {
+                "type": "object"
+              }
+            }
+          },
+          "subjects": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties":{
+                "_id": { "type": "string"},
+                "subjectID": { "type": "string" },
+                "subject": { "type": "string" },
+                "teacher": { "type": "string" }
+              }
+            }
           }
         }
       }

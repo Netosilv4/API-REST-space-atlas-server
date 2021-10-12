@@ -23,14 +23,14 @@ export const tokenCheck = async (
   const { register } = req.query;
 
   if (!register) {
-    res.status(401).json({ message: 'Matrícula não informada ' });
+    res.status(400).json({ code: 400, message: 'Matrícula não informada ' });
     return;
   }
 
   const token = authorization;
 
   if (!token) {
-    res.status(401).json({ message: 'Token não informado' });
+    res.status(400).json({ code: 400, message: 'Token não informado' });
     return;
   }
 
@@ -41,7 +41,7 @@ export const tokenCheck = async (
   const user = await findStudent(register as string);
 
   if (!user) {
-    res.status(401).json({ message: 'Erro ao procurar usuário do token.' });
+    res.status(404).json({ code: 404, message: 'Erro ao procurar usuário do token.' });
     return;
   }
 
