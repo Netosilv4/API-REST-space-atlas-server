@@ -11,3 +11,11 @@ export interface IGradesSubjects {
   grades: IGrades | null
   subjects: ISubject[]
 }
+
+export interface UpdateQuery {
+  acknowledged: boolean,
+  modifiedCount: number,
+  upsertedId: any,
+  upsertedCount: number,
+  matchedCount: number
+}

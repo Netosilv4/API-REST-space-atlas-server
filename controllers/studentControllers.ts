@@ -10,6 +10,13 @@ export const getStudent = async (req: Request, res: Response): Promise<void> => 
 
   const response = await studentHandler(register as string);
 
+  const { code } = response as AuthMessage;
+
+  if (code && code !== 200) {
+    res.status(400).json(response);
+    return;
+  }
+
   res.status(200).json(response);
 };
 

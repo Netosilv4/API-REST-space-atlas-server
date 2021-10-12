@@ -1,11 +1,9 @@
-import { Query } from 'mongoose';
-import { UpdateResult } from 'mongoose/node_modules/mongodb';
+import { RequestBody } from '../controllers/adminControllers';
 import { IStudent, Student } from '../schema/studentSchema';
 import { IUser, User } from '../schema/userSchema';
 
-export const insertNewStudent = async (student: IStudent)
-  : Promise<IStudent & { _id: any; }> => {
-  const response = await Student.create(student);
+export const insertNewStudent = (student: IStudent) => {
+  const response = Student.create(student);
 
   return response;
 };
@@ -17,9 +15,20 @@ export const insertNewUser = (user: IUser)
   return response;
 };
 
-export const updateStudentBasics = (student: IStudent)
-  : Query<UpdateResult, IStudent & { _id: any; }, {}, IStudent> => {
-  const response = Student.updateOne({ register: student.auth.register }, { ...student });
+export const updateUser = (target: string, value: string) => {
+  const user = User.updateOne({ target }, { [target]: value });
+
+  return user;
+};
+
+export const updateStudentBasics = async (request: RequestBody, register: string) => {
+  const { target, value } = request;
+
+  const response = Student.updateOne({ register }, { [target]: value });
+
+  if (target === 'auth.register') {
+    await updateUser('register', value);
+  }
 
   return response;
 };

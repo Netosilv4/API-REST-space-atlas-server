@@ -3,18 +3,33 @@ import { newStudentHandler, updateStudentHandler } from '../services/adminServic
 
 import { IStudent } from '../schema/studentSchema';
 
+export interface RequestBody {
+  target: string
+  value: string
+}
+
 export const newStudent = async (req: Request, res: Response): Promise<void> => {
   const { student } : { student: IStudent } = req.body;
 
   const response = await newStudentHandler(student);
-
+  if (response.code !== 200) {
+    res.status(response.code).json(response);
+    return;
+  }
   res.status(200).json(response);
 };
 
 export const changeStudendBasics = async (req: Request, res: Response): Promise<void> => {
-  const { student }: { student: IStudent } = req.body;
+  const { request }: { request: RequestBody } = req.body;
 
-  const response = await updateStudentHandler(student);
+  const { register } = req.query;
+
+  const response = await updateStudentHandler(request, register as string);
+
+  if (response.code !== 200) {
+    res.status(response.code).json(response);
+    return;
+  }
 
   res.status(200).json(response);
 };
