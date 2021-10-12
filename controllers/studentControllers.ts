@@ -3,13 +3,14 @@ import { IRequest } from '../schema/studentsRequests';
 import {
   studentHandler, newRequestHandler, scheduleHandler, gradesHandler,
 } from '../services/studentServices';
+import { AuthMessage } from '../validations/interfaces';
 
 export const getStudent = async (req: Request, res: Response): Promise<void> => {
   const { register } = req.query;
 
-  const student = await studentHandler(register as string);
+  const response = await studentHandler(register as string);
 
-  res.status(200).json(student);
+  res.status(200).json(response);
 };
 
 export const postNewRequest = async (req: Request, res: Response): Promise<void> => {
@@ -17,21 +18,42 @@ export const postNewRequest = async (req: Request, res: Response): Promise<void>
 
   const response = await newRequestHandler(request);
 
-  res.status(200).json({ response });
+  const { code } = response as AuthMessage;
+
+  if (code && code !== 200) {
+    res.status(code).json(response);
+    return;
+  }
+
+  res.status(200).json(response);
 };
 
 export const getSchedule = async (req: Request, res: Response): Promise<void> => {
   const { className } = req.query;
 
-  const schedule = await scheduleHandler(className as string);
+  const response = await scheduleHandler(className as string);
 
-  res.status(200).json(schedule);
+  const { code } = response as AuthMessage;
+
+  if (code && code !== 200) {
+    res.status(code).json(response);
+    return;
+  }
+
+  res.status(200).json(response);
 };
 
 export const getGrades = async (req: Request, res: Response): Promise<void> => {
   const { register } = req.query;
 
-  const gradesAndSubjects = await gradesHandler(register as string);
+  const response = await gradesHandler(register as string);
 
-  res.status(200).json(gradesAndSubjects);
+  const { code } = response as AuthMessage;
+
+  if (code && code !== 200) {
+    res.status(code).json(response);
+    return;
+  }
+
+  res.status(200).json(response);
 };

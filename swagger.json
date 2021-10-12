@@ -42,6 +42,10 @@
                 "schema": {
                   "type": "object",
                   "$ref": "#/components/schemas/authmessage"
+                },
+                "example": {
+                  "code": 400,
+                  "message": "Matrícula não informada"
                 }
               }
             }
@@ -84,6 +88,10 @@
                 "schema": {
                   "type": "object",
                   "$ref": "#/components/schemas/authmessage"
+                },
+                "example": {
+                  "code": 400,
+                  "message": "Matrícula não informada"
                 }
               }
             }
@@ -131,6 +139,10 @@
                 "schema": {
                   "type": "object",
                   "$ref": "#/components/schemas/authmessage"
+                },
+                "example": {
+                  "code": 400,
+                  "message": "Matrícula não informada"
                 }
               }
             }
@@ -173,6 +185,10 @@
                 "schema": {
                   "type": "object",
                   "$ref": "#/components/schemas/authmessage"
+                },
+                "example": {
+                  "code": 400,
+                  "message": "Matrícula não informada"
                 }
               }
             }
@@ -187,6 +203,66 @@
                 "schema": {
                   "type": "object",
                   "$ref": "#/components/schemas/grades"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/request": {
+      "post": {
+        "summary": "POST a new request",
+        "tags": ["Student"],
+        "security":  [{ "bearerAuth": []}],
+        "parameters":[
+          {
+            "name": "register",
+            "in": "query",
+            "description": "Student register code",
+            "required": true
+          }
+        ],
+        "requestBody": {
+          "description": "Request body",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/request"
+              }
+            }
+          }
+        },
+        "responses": {
+          "400": {
+            "description": "Missing params / body fields",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "$ref": "#/components/schemas/authmessage"
+                },
+                "example": {
+                  "code": 400,
+                  "message": "Matrícula não informada"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "$ref": "#/components/schemas/authmessage"
+                },
+                "example": {
+                  "code": 200,
+                  "message": "Solicitação enviada"
                 }
               }
             }
@@ -326,6 +402,36 @@
                 "subjectID": { "type": "string" },
                 "subject": { "type": "string" },
                 "teacher": { "type": "string" }
+              }
+            }
+          }
+        }
+      },
+      "request": {
+        "type": "object",
+        "properties": {
+          "request": {
+            "type": "object",
+            "properties":{
+              "register": {
+                "type": "string",
+                "required": true
+              },
+              "name": {
+                "type": "string",
+                "required": true
+              },
+              "target": {
+                "type": "string",
+                "required": true
+              },
+              "newValue": {
+                "type": "string",
+                "required": true
+              },
+              "reason": {
+                "type": "string",
+                "required": true
               }
             }
           }

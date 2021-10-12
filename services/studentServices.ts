@@ -24,7 +24,9 @@ export const newRequestHandler = async (request: IRequest)
 
   const studentRequest = await newRequest(request);
 
-  return studentRequest;
+  if (!studentRequest) return { code: 400, message: 'Não foi possivel processar solicitação' };
+
+  return { code: 200, message: 'Solicitação enviada' };
 };
 
 export const scheduleHandler = async (classCode: string)
