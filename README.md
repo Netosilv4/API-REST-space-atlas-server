@@ -7,6 +7,7 @@
 
 ## Overview
 ![space-atlas-details](https://user-images.githubusercontent.com/74731807/137553332-eaaa2259-c854-4d66-a90b-123e677279a1.png)
+![space-atlas-chat](https://user-images.githubusercontent.com/74731807/137553396-81079e50-80aa-4202-836d-70703c4634fe.png)
 
 
 
