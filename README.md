@@ -6,9 +6,9 @@
 - [Author](#author)
 
 ## Overview
-![space-atlas-details](https://user-images.githubusercontent.com/74731807/137553332-eaaa2259-c854-4d66-a90b-123e677279a1.png)
-![space-atlas-chat](https://user-images.githubusercontent.com/74731807/137553396-81079e50-80aa-4202-836d-70703c4634fe.png)
 
+![space-atlas-details](https://user-images.githubusercontent.com/74731807/137553538-beef7854-da39-48e3-a9e9-e0c630105a5b.png)
+![space-atlas-chat](https://user-images.githubusercontent.com/74731807/137553553-cfd2c867-0a18-45d2-aa2c-5be9550b58fe.png)
 
 
 ### The project
