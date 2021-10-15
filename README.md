@@ -6,6 +6,9 @@
 - [Author](#author)
 
 ## Overview
+![space-atlas-details](https://user-images.githubusercontent.com/74731807/137553332-eaaa2259-c854-4d66-a90b-123e677279a1.png)
+
+
 
 ### The project
 
